@@ -1,0 +1,32 @@
+---
+import { t as translate } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: string };
+const t = (key: string) => translate(key, lang);
+---
+
+<div id="cookie-consent" class="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 shadow-xl p-4 transform translate-y-full transition-transform duration-300">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-text-light dark:text-gray-300">{t('cookies.message')}</p>
+    <div class="flex gap-2 shrink-0">
+      <button
+        id="cookie-accept"
+        class="px-4 py-2 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent-light transition-colors"
+      >
+        {t('cookies.accept')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  if (!localStorage.getItem('cookie-consent')) {
+    setTimeout(() => {
+      document.getElementById('cookie-consent')?.classList.remove('translate-y-full');
+    }, 500);
+  }
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'accepted');
+    document.getElementById('cookie-consent')?.classList.add('translate-y-full');
+  });
+</script>

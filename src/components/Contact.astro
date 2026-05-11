@@ -1,0 +1,65 @@
+---
+import { t as translate } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: string };
+const t = (key: string) => translate(key, lang);
+---
+
+<section id="contact" class="py-20 bg-gradient-to-br from-primary to-primary-light dark:from-gray-950 dark:to-gray-900">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+        {t('contact.title')}
+      </h2>
+      <p class="text-gray-300">{t('contact.subtitle')}</p>
+    </div>
+
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="bg-white dark:bg-surface-dark rounded-2xl p-8 shadow-xl">
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hidden"><label>Don't fill this: <input name="bot-field" /></label></p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label class="block text-sm font-medium text-primary dark:text-white mb-2">{t('contact.name')}</label>
+          <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-primary dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-primary dark:text-white mb-2">{t('contact.email')}</label>
+          <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-primary dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all" />
+        </div>
+        <div class="sm:col-span-2">
+          <label class="block text-sm font-medium text-primary dark:text-white mb-2">{t('contact.phone')}</label>
+          <input type="tel" name="phone" class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-primary dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all" />
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm font-medium text-primary dark:text-white mb-2">{t('contact.message')}</label>
+        <textarea name="message" rows="5" required class="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 text-primary dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all resize-none"></textarea>
+      </div>
+
+      <button type="submit" class="w-full py-4 bg-accent text-white font-semibold rounded-xl hover:bg-accent-light transition-all duration-200 transform hover:scale-[1.02]">
+        {t('contact.send')}
+      </button>
+
+      <div id="contact-success" class="hidden mt-4 p-4 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 rounded-xl text-center font-medium">
+        {t('contact.success')}
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector('form[name="contact"]');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form as HTMLFormElement);
+    fetch('/', { method: 'POST', body: data })
+      .then(() => {
+        (form as HTMLFormElement).reset();
+        document.getElementById('contact-success')?.classList.remove('hidden');
+        setTimeout(() => document.getElementById('contact-success')?.classList.add('hidden'), 5000);
+      })
+      .catch(() => {});
+  });
+</script>

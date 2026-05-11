@@ -1,0 +1,51 @@
+---
+import { t as translate } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: string };
+const t = (key: string) => translate(key, lang);
+
+const services = [
+  { icon: 'web', title: t('services.web'), desc: t('services.web.desc') },
+  { icon: 'seo', title: t('services.seo'), desc: t('services.seo.desc') },
+  { icon: 'maintenance', title: t('services.maintenance'), desc: t('services.maintenance.desc') },
+];
+---
+
+<section id="services" class="py-20 bg-white dark:bg-surface-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
+        {t('services.title')}
+      </h2>
+      <p class="text-text-light dark:text-gray-400 max-w-2xl mx-auto">
+        {t('services.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <div class="group p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-accent/30 dark:hover:border-accent/30 hover:shadow-lg transition-all duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+            {service.icon === 'web' && (
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            )}
+            {service.icon === 'seo' && (
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            )}
+            {service.icon === 'maintenance' && (
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            )}
+          </div>
+          <h3 class="font-display text-xl font-semibold text-primary dark:text-white mb-3">{service.title}</h3>
+          <p class="text-text-light dark:text-gray-400 leading-relaxed">{service.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Services from '../../components/Services.astro';
+import Portfolio from '../../components/Portfolio.astro';
+import FAQ from '../../components/FAQ.astro';
+import Contact from '../../components/Contact.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+import { ui } from '../../i18n/translations';
+
+const lang = 'nl';
+const t = (key: string) => ui.nl[key as keyof typeof ui.nl];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: t('site.title'),
+  description: t('site.description'),
+  url: new URL('/nl/', Astro.site).href,
+  telephone: '+31 6 12345678',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'NL',
+  },
+  areaServed: 'NL',
+  priceRange: '€€',
+};
+---
+
+<BaseLayout lang={lang} title={t('site.title') + ' — ' + t('hero.title')} description={t('site.description')} canonicalURL={new URL('/nl/', Astro.site).href}>
+  <Header lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Services lang={lang} />
+    <Portfolio lang={lang} />
+    <CTA lang={lang} />
+    <FAQ lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+</BaseLayout>

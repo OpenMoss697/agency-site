@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Sitemap: https://example.nl/sitemap-0.xml
+
+# Privacy-respecting: no creepy crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /

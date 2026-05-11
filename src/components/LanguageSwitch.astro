@@ -1,0 +1,13 @@
+---
+const { lang } = Astro.props as { lang: string };
+const currentPath = Astro.url.pathname;
+const altLang = lang === 'nl' ? 'en' : 'nl';
+const altPath = currentPath.replace(`/${lang}/`, `/${altLang}/`);
+---
+
+<a
+  href={altPath}
+  class="px-2 py-1 rounded-lg text-xs font-medium text-text-light hover:text-primary dark:text-gray-300 dark:hover:text-white transition-colors border border-gray-200 dark:border-gray-700"
+>
+  {lang === 'nl' ? 'EN' : 'NL'}
+</a>

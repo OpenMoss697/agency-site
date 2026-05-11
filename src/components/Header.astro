@@ -1,0 +1,74 @@
+---
+import { t as translate } from '../i18n/utils';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
+
+const { lang } = Astro.props as { lang: string };
+const t = (key: string) => translate(key, lang);
+
+const navItems = [
+  { key: 'nav.home', href: `/${lang}/` },
+  { key: 'nav.about', href: `/${lang}/about` },
+  { key: 'nav.services', href: `/${lang}/services` },
+  { key: 'nav.portfolio', href: `/${lang}/portfolio` },
+  { key: 'nav.faq', href: `/${lang}/faq` },
+  { key: 'nav.contact', href: `/${lang}/contact` },
+];
+---
+
+<header class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-surface-dark/80 border-b border-gray-200/50 dark:border-gray-800/50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a href={`/${lang}/`} class="flex items-center gap-2 font-display font-bold text-xl text-primary dark:text-white">
+        <span class="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-white text-sm">W</span>
+        <span class="hidden sm:inline">{t('site.title')}</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex items-center gap-1">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="px-3 py-2 rounded-lg text-sm font-medium text-text-light hover:text-primary dark:text-gray-300 dark:hover:text-white transition-colors"
+          >
+            {t(item.key)}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <ThemeToggle lang={lang} />
+        <LanguageSwitch lang={lang} />
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden p-2 rounded-lg text-text-light hover:text-primary dark:text-gray-300"
+          aria-label="Menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="block px-3 py-2 rounded-lg text-base font-medium text-text-light hover:text-primary dark:text-gray-300 dark:hover:text-white"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
+  });
+</script>

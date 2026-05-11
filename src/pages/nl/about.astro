@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { ui } from '../../i18n/translations';
+
+const lang = 'nl';
+const t = (key: string) => ui.nl[key as keyof typeof ui.nl];
+---
+
+<BaseLayout lang={lang} title={t('nav.about') + ' — ' + t('site.title')}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="font-display text-4xl font-bold text-primary dark:text-white mb-8">{t('nav.about')}</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        <div>
+          <p class="text-lg text-text-light dark:text-gray-300 mb-4 leading-relaxed">
+            Wij zijn een modern webdesign bureau dat zich richt op het bouwen van razendsnelle, prachtige websites voor het Nederlandse bedrijfsleven. Onze missie is eenvoudig: uw bedrijf online laten schitteren met een website die niet alleen mooi is, maar ook perfect presteert.
+          </p>
+          <p class="text-lg text-text-light dark:text-gray-300 leading-relaxed">
+            Met de nieuwste technologieën en een scherp oog voor design leveren wij websites die scoren in Google en converteren bij bezoekers.
+          </p>
+        </div>
+        <div class="bg-surface dark:bg-gray-800 rounded-2xl p-8">
+          <h2 class="font-display text-xl font-semibold text-primary dark:text-white mb-6">Onze Waarden</h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span class="text-text-light dark:text-gray-300"><strong class="text-primary dark:text-white">Kwaliteit</strong> — Wij leveren alleen het beste. Geen shortcuts.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span class="text-text-light dark:text-gray-300"><strong class="text-primary dark:text-white">Snelheid</strong> — Razendsnelle websites, snelle levertijden.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              </span>
+              <span class="text-text-light dark:text-gray-300"><strong class="text-primary dark:text-white">Transparantie</strong> — Heldere communicatie, geen verborgen kosten.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

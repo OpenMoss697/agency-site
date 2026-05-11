@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = 'nl';
+---
+
+<BaseLayout lang={lang} title="Privacyverklaring — Uw Digitale Partner">
+  <Header lang={lang} />
+  <main class="pt-24 pb-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 prose dark:prose-invert">
+      <h1 class="font-display text-4xl font-bold text-primary dark:text-white mb-8">Privacyverklaring</h1>
+      <p class="text-text-light dark:text-gray-300">Laatst bijgewerkt: 2026</p>
+
+      <h2 class="text-2xl font-semibold text-primary dark:text-white mt-10 mb-4">1. Welke gegevens verzamelen wij</h2>
+      <p class="text-text-light dark:text-gray-300">Wij verzamelen alleen de gegevens die u vrijwillig aan ons verstrekt via het contactformulier: naam, e-mailadres, telefoonnummer en uw bericht.</p>
+
+      <h2 class="text-2xl font-semibold text-primary dark:text-white mt-10 mb-4">2. Hoe gebruiken wij uw gegevens</h2>
+      <p class="text-text-light dark:text-gray-300">Uw gegevens worden uitsluitend gebruikt om contact met u op te nemen over uw aanvraag. Wij delen uw gegevens niet met derden.</p>
+
+      <h2 class="text-2xl font-semibold text-primary dark:text-white mt-10 mb-4">3. Cookies</h2>
+      <p class="text-text-light dark:text-gray-300">Deze website gebruikt alleen functionele cookies die noodzakelijk zijn voor de werking van de site. Er worden geen tracking cookies van derden geplaatst.</p>
+
+      <h2 class="text-2xl font-semibold text-primary dark:text-white mt-10 mb-4">4. Uw rechten</h2>
+      <p class="text-text-light dark:text-gray-300">U heeft het recht om uw gegevens in te zien, te wijzigen of te laten verwijderen. Neem hiervoor contact met ons op via info@example.nl.</p>
+
+      <h2 class="text-2xl font-semibold text-primary dark:text-white mt-10 mb-4">5. Contact</h2>
+      <p class="text-text-light dark:text-gray-300">Voor vragen over deze privacyverklaring kunt u contact opnemen via info@example.nl.</p>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

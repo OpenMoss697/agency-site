@@ -1,0 +1,74 @@
+---
+import { t as translate } from '../i18n/utils';
+import CookieConsent from '../components/CookieConsent.astro';
+import '../styles/global.css';
+
+interface Props {
+  lang: string;
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalURL?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  ogType = 'website',
+  canonicalURL,
+} = Astro.props;
+
+const t = (key: string) => translate(key, lang);
+const currentPath = Astro.url.pathname;
+const alternateLang = lang === 'nl' ? 'en' : 'nl';
+const alternatePath = currentPath.replace(`/${lang}/`, `/${alternateLang}/`);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <!-- Primary Meta -->
+    <title>{title || t('site.title')}</title>
+    <meta name="description" content={description || t('site.description')} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title || t('site.title')} />
+    <meta property="og:description" content={description || t('site.description')} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={t('site.title')} />
+    <meta property="og:locale" content={lang === 'nl' ? 'nl_NL' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Canonical / hreflang -->
+    {canonicalURL && <link rel="canonical" href={canonicalURL} />}
+    <link rel="alternate" hreflang={lang} href={new URL(currentPath, Astro.site).href} />
+    <link rel="alternate" hreflang={alternateLang} href={new URL(alternatePath, Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(currentPath.replace(`/${lang}/`, '/nl/'), Astro.site).href} />
+
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=dm-sans:400,500,600,700|inter:300,400,500,600,700" rel="stylesheet" />
+
+
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <script is:inline>
+      (function(){var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.body.classList.add("dark")}})();
+    </script>
+
+    <slot />
+
+    <CookieConsent lang={lang} />
+  </body>
+</html>
