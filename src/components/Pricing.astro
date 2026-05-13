@@ -1,0 +1,97 @@
+---
+import { t as translate } from '../i18n/utils';
+
+const { lang } = Astro.props as { lang: string };
+const t = (key: string) => translate(key, lang);
+
+const plans = [
+  {
+    name: t('pricing.basic.name'),
+    price: t('pricing.basic.price'),
+    desc: t('pricing.basic.desc'),
+    features: [t('pricing.basic.f1'), t('pricing.basic.f2'), t('pricing.basic.f3'), t('pricing.basic.f4')],
+    cta: t('pricing.cta'),
+    popular: false,
+  },
+  {
+    name: t('pricing.pro.name'),
+    price: t('pricing.pro.price'),
+    desc: t('pricing.pro.desc'),
+    features: [t('pricing.pro.f1'), t('pricing.pro.f2'), t('pricing.pro.f3'), t('pricing.pro.f4'), t('pricing.pro.f5'), t('pricing.pro.f6')],
+    cta: t('pricing.cta.pro'),
+    popular: true,
+  },
+  {
+    name: t('pricing.adv.name'),
+    price: t('pricing.adv.price'),
+    desc: t('pricing.adv.desc'),
+    features: [t('pricing.adv.f1'), t('pricing.adv.f2'), t('pricing.adv.f3'), t('pricing.adv.f4'), t('pricing.adv.f5'), t('pricing.adv.f6')],
+    cta: t('pricing.cta.adv'),
+    popular: false,
+  },
+];
+---
+
+<section id="pricing" class="py-20 bg-white dark:bg-surface-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl sm:text-4xl font-bold text-primary dark:text-white mb-4">
+        {t('pricing.title')}
+      </h2>
+      <p class="text-text-light dark:text-gray-400 max-w-2xl mx-auto">
+        {t('pricing.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <div class={`relative group rounded-2xl border-2 transition-all duration-300 hover:shadow-xl ${
+          plan.popular
+            ? 'border-accent bg-accent/5 dark:bg-accent/5 scale-[1.02] md:scale-105'
+            : 'border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark hover:border-accent/30'
+        }`}>
+          {plan.popular && (
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <span class="px-4 py-1 bg-accent text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                {t('pricing.popular')}
+              </span>
+            </div>
+          )}
+
+          <div class="p-8">
+            <h3 class="font-display text-xl font-bold text-primary dark:text-white mb-2">{plan.name}</h3>
+            <div class="mb-3">
+              <span class="font-display text-4xl font-bold text-primary dark:text-white">{plan.price}</span>
+              {!plan.name.toLowerCase().includes('maatwerk') && !plan.name.toLowerCase().includes('custom') && (
+                <span class="text-text-light dark:text-gray-400 text-sm"> /eenmalig</span>
+              )}
+            </div>
+            <p class="text-text-light dark:text-gray-400 text-sm mb-8 leading-relaxed">{plan.desc}</p>
+
+            <ul class="space-y-3 mb-8">
+              {plan.features.map((feature) => (
+                <li class="flex items-start gap-3 text-sm text-text-light dark:text-gray-300">
+                  <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={`/${lang}/contact`}
+              class={`block text-center py-3 px-6 rounded-xl font-semibold transition-all duration-200 hover:scale-105 ${
+                plan.popular
+                  ? 'bg-accent text-white hover:bg-accent-light'
+                  : 'bg-primary dark:bg-gray-800 text-white hover:bg-primary-light dark:hover:bg-gray-700'
+              }`}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

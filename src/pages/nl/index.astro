@@ -2,11 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
+import Marquee from '../../components/Marquee.astro';
 import Services from '../../components/Services.astro';
+import Process from '../../components/Process.astro';
 import Portfolio from '../../components/Portfolio.astro';
+import Pricing from '../../components/Pricing.astro';
 import FAQ from '../../components/FAQ.astro';
 import Contact from '../../components/Contact.astro';
 import CTA from '../../components/CTA.astro';
+import FloatingCTA from '../../components/FloatingCTA.astro';
 import Footer from '../../components/Footer.astro';
 import { ui } from '../../i18n/translations';
 
@@ -33,12 +37,16 @@ const jsonLd = {
   <Header lang={lang} />
   <main>
     <Hero lang={lang} />
+    <Marquee lang={lang} />
     <Services lang={lang} />
+    <Process lang={lang} />
     <Portfolio lang={lang} />
+    <Pricing lang={lang} />
     <CTA lang={lang} />
     <FAQ lang={lang} />
     <Contact lang={lang} />
   </main>
+  <FloatingCTA lang={lang} />
   <Footer lang={lang} />
 
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
