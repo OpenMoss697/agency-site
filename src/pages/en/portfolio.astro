@@ -6,7 +6,7 @@ import Footer from '../../components/Footer.astro';
 import { ui } from '../../i18n/translations';
 
 const lang = 'en';
-const t = (key: string) => ui.nl[key as keyof typeof ui.nl];
+const t = (key: string) => ui.en[key as keyof typeof ui.en];
 ---
 
 <BaseLayout lang={lang} title={t('nav.portfolio') + ' — ' + t('site.title')}>

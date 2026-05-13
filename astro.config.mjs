@@ -3,7 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://example.nl',
+  site: 'https://openmoss697.github.io',
+  base: '/agency-site/',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
